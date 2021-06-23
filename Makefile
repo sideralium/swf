@@ -9,7 +9,7 @@ dl/preloader:
 x/preloader: dl/preloader
 	cd $(rpath); abcexport preloader.swf; rabcdasm preloader-0.abc
 	cd preloader-0; \
-		git init -b preloader-$(shell sha256sum $(rpath)/preloader.swf | cut -c -8) $(rpath)/preloader-0; \
+		git init -b preloader-$(shell sha256sum $(rpath)/preloader.swf | cut -c -8); \
 		git add .; \
 		git commit -m "init"
 
