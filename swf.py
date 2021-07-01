@@ -29,10 +29,10 @@ def download(path):
     full_path = join(assets_dir, path)
     makedirs(dirname(full_path), exist_ok=True)
     if exists(full_path):
-        print('[-] skipping the download of %s.swf, already has it' % args.file)
+        info('skipping the download of %s.swf, already has it' % args.file)
         return
 
-    print('[-] downloading %s' % url)
+    info('downloading %s' % url)
     f = open(full_path, 'wb')
 
     try:
@@ -100,15 +100,20 @@ def robust_abc_doc(program):
     exit(1)
 
 def extract(file):
-    print('[-] extracting %s.swf' % args.file)
+    info('extracting %s.swf' % args.file)
     if file.extract_abc() > 0:
-        print('[x] an error occured while extracting abc from %s.swf' % args.file)
+        error('an error occured while extracting abc from %s.swf' % args.file)
 
 def disassemble(file):
-    print('[-] disassembling %s.swf' % args.file)
+    info('disassembling %s.swf' % args.file)
     if file.disassemble_abc() > 0:
-        print('[x] an error occured while disassembling %s.swf\'s abc' % args.file)
+        error('an error occured while disassembling %s.swf\'s abc' % args.file)
 
+def info(message):
+    print('[-] %s' % message)
+
+def error(message):
+    print('\033[31m[x] %s\033[0m' % message)
 
 dict = {"preloader": "spacemap/preloader.swf", "main": "spacemap/main.swf", "expressInstall": "swf_global/expressInstall.swf"}
 
